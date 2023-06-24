@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="View.NavScreen"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NavScreenController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10.0">
+         <children>
+            <Button fx:id="customersButton" alignment="CENTER" mnemonicParsing="false" onAction="#onActionCustButton" text="Customers" textAlignment="CENTER" />
+            <Button fx:id="userButton" mnemonicParsing="false" onAction="#onActionUserButton" text="Users" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#onActionBackButton" text="Back" />
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
