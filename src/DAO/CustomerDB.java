@@ -1,7 +1,6 @@
 package DAO;
 
-import Model.Customers;
-import Model.Users;
+import Model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -9,11 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomersDB {
+public abstract class CustomerDB {
     public boolean act;
 
     //uses search field to run a SQL select query
-    public static Customers getCustomer(String customerName) throws SQLException, Exception {
+    public static Customer getCustomer(String customerName) throws SQLException, Exception {
 
         JDBC.getConnection();
         String sqlStatement = "select * FROM users WHERE User_name = '" + customerName + "'";
@@ -26,16 +25,16 @@ public class CustomersDB {
             String postalCode = result.getString("Postal_Code");
             String phone = result.getString("Phone");
             int divisionID = result.getInt("Division_ID");
-            Customers customerResult = new Customers(customerID, resultName, address, postalCode, phone, divisionID);
+            Customer customerResult = new Customer(customerID, resultName, address, postalCode, phone, divisionID);
             return customerResult;
         }
         return null;
     }
 
     //uses Query class
-    public static ObservableList<Customers> getallCustomers() throws SQLException, Exception {
+    public static ObservableList<Customer> getallCustomers() throws SQLException, Exception {
 
-        ObservableList<Customers> customersList = FXCollections.observableArrayList();
+        ObservableList<Customer> customerList = FXCollections.observableArrayList();
         JDBC.getConnection();
         String sqlStatement = "select * FROM customers";
         Query.makeQuery(sqlStatement);
@@ -47,14 +46,14 @@ public class CustomersDB {
             String postalCode = result.getString("Postal_Code");
             String phone = result.getString("Phone");
             int divisionID = result.getInt("Division_ID");
-            Customers customerResult = new Customers(customerID, resultName, address, postalCode, phone, divisionID);
-            customersList.add(customerResult);
+            Customer customerResult = new Customer(customerID, resultName, address, postalCode, phone, divisionID);
+            customerList.add(customerResult);
         }
-        return customersList;
+        return customerList;
     }
 
-    /**public static ObservableList<Customers> getAllCustomers() {
-        ObservableList<Customers> cusList = FXCollections.observableArrayList();
+    /**public static ObservableList<Customer> getAllCustomers() {
+        ObservableList<Customer> cusList = FXCollections.observableArrayList();
 
         try {
             //my SQL statement
@@ -72,7 +71,7 @@ public class CustomersDB {
                 String postalCode = result.getString("Postal_Code");
                 String phone = result.getString("Phone");
                 int divisionID = result.getInt("Division_ID");
-                Customers customerResult = new Customers(customerID, resultName, address, postalCode, phone, divisionID);
+                Customer customerResult = new Customers(customerID, resultName, address, postalCode, phone, divisionID);
                 cusList.add(customerResult);
             }
         }
@@ -84,11 +83,17 @@ public class CustomersDB {
 
 
 
-    public static int insert(/** list params here **/) throws SQLException {
-        String sql = "INSERT INTO customers (column names from db) VALUES(?, ?)";
+    public static int insertCustomer(String custName, String custAddress, String custPostCode, String custPhone, int divisionID) throws SQLException {
+
+        String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-        //40 mins into JDBC webinar) ps.set the type of param ps.setString(1, customerName) etc
-        //do this for each param matching sql types to java types (index #, param name)
+
+        ps.setString(1, custName);
+        ps.setString(2, custAddress);
+        ps.setString(3, custPostCode);
+        ps.setString(4, custPhone);
+        ps.setInt(5, divisionID);
+
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
     }

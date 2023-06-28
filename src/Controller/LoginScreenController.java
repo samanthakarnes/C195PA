@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
+import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -66,7 +68,13 @@ public class LoginScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        locationField.setText(Locale.getDefault().getDisplayCountry());
+        //locationField.setText(Locale.getDefault().getDisplayCountry());
+        String location = Locale.getDefault().getDisplayCountry();
+
+        //This displayed MT
+        //String zoneLocation = ZoneId.systemDefault().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.getDefault());
+
+        locationField.setText(location);
     }
 }
 

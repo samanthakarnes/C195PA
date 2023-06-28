@@ -2,7 +2,7 @@ package Model;
 
 import Helper.DateAndTimeProcessing;
 
-public class Customers extends DateAndTimeProcessing {
+public class Customer extends DateAndTimeProcessing {
     private int customerID; //private key in DB
     String customerName;
     String address;
@@ -10,7 +10,7 @@ public class Customers extends DateAndTimeProcessing {
     String phoneNumber;
     int divisionID; //foreign key in DB
 
-    public Customers(int customerID, String customerName, String address, String postalCode, String phoneNumber, int divisionID){
+    public Customer(int customerID, String customerName, String address, String postalCode, String phoneNumber, int divisionID){
         this.customerID = customerID;
         this.customerName = customerName;
         this.address = address;

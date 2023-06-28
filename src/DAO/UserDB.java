@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UsersDB {
+public class UserDB {
     static boolean act;
 
 

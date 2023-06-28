@@ -1,7 +1,7 @@
 package Controller;
 
-import DAO.CustomersDB;
-import Model.Customers;
+import DAO.CustomerDB;
+import Model.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +30,7 @@ public class CustomerTableViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
         try {
-            customerTableView.setItems(CustomersDB.getallCustomers());
+            customerTableView.setItems(CustomerDB.getallCustomers());
         }
         catch (Exception e){
             System.out.println("Error: " + e);
@@ -52,31 +52,31 @@ public class CustomerTableViewController implements Initializable {
     private Button backButton;
 
     @FXML
-    private TableColumn<Customers, String> customerAddressCol;
+    private TableColumn<Customer, String> customerAddressCol;
 
     @FXML
-    private TableColumn<Customers, Integer> customerDivisionIDCol;
+    private TableColumn<Customer, Integer> customerDivisionIDCol;
 
     @FXML
-    private TableColumn<Customers, Integer> customerIDCol;
+    private TableColumn<Customer, Integer> customerIDCol;
 
     @FXML
     private Label customerLabel;
 
     @FXML
-    private TableColumn<Customers, String> customerNameCol;
+    private TableColumn<Customer, String> customerNameCol;
 
     @FXML
-    private TableColumn<Customers, String> customerPhoneCol;
+    private TableColumn<Customer, String> customerPhoneCol;
 
     @FXML
-    private TableColumn<Customers, String> customerPostalCodeCol;
+    private TableColumn<Customer, String> customerPostalCodeCol;
 
     @FXML
     private TextField customerSearch;
 
     @FXML
-    private TableView<Customers> customerTableView;
+    private TableView<Customer> customerTableView;
 
     @FXML
     private Button deleteCustomerButton;
@@ -88,8 +88,11 @@ public class CustomerTableViewController implements Initializable {
     private Button modifyCustomerButton;
 
     @FXML
-    void onActionAddCustomer(ActionEvent event) {
-
+    void onActionAddCustomer(ActionEvent event) throws IOException {
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/View/AddCustomer.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     //goes back to the NavScreen
