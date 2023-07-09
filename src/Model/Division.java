@@ -38,5 +38,11 @@ public class Division {
         return countryID;
     }
 
+    //Override toString method for combobox
+    @Override
+    public String toString() {
+        return ("#" + Integer.toString(divisionID) + " - " +divisionName);
+    }
+
 
 }

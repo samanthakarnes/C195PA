@@ -1,5 +1,7 @@
 package Model;
 
+import javafx.collections.ObservableList;
+
 public class Country {
 
     private int countryID;
@@ -25,4 +27,11 @@ public class Country {
     public String getCountryName() {
         return countryName;
     }
+
+    //override toString method for combovox
+    @Override
+    public String toString(){
+        return ("#" + Integer.toString(countryID) + " - " + countryName);
+    }
+
 }

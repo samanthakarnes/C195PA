@@ -32,7 +32,7 @@ public abstract class CustomerDB {
     }
 
     //uses Query class
-    public static ObservableList<Customer> getallCustomers() throws SQLException, Exception {
+    public static ObservableList<Customer> getAllCustomers() throws SQLException, Exception {
 
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
         JDBC.getConnection();
@@ -52,37 +52,6 @@ public abstract class CustomerDB {
         return customerList;
     }
 
-    /**public static ObservableList<Customer> getAllCustomers() {
-        ObservableList<Customer> cusList = FXCollections.observableArrayList();
-
-        try {
-            //my SQL statement
-            String sql = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, Division_ID FROM customers";
-
-            //create a prepared statement
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            //execute the query and get results
-            ResultSet result = ps.executeQuery();
-            //work through the results and add to the ObservableList
-            while (result.next()) {
-                int customerID = result.getInt("Customer_ID");
-                String resultName = result.getString("Customer_Name");
-                String address = result.getString("Address");
-                String postalCode = result.getString("Postal_Code");
-                String phone = result.getString("Phone");
-                int divisionID = result.getInt("Division_ID");
-                Customer customerResult = new Customers(customerID, resultName, address, postalCode, phone, divisionID);
-                cusList.add(customerResult);
-            }
-        }
-        catch (Exception e) {
-            System.out.println("Error:" + e.getMessage());
-        }
-        return cusList;
-    } **/
-
-
-
     public static int insertCustomer(String custName, String custAddress, String custPostCode, String custPhone, int divisionID) throws SQLException {
 
         String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
@@ -93,6 +62,36 @@ public abstract class CustomerDB {
         ps.setString(3, custPostCode);
         ps.setString(4, custPhone);
         ps.setInt(5, divisionID);
+
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected;
+    }
+
+
+
+    public static int modifyCustomer(int custID, String custName, String custAddress, String custPostCode, String custPhone, int divisionID) throws SQLException {
+
+        String sqlStmt = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+        PreparedStatement ps =  JDBC.connection.prepareStatement(sqlStmt);
+
+        ps.setString(1, custName);
+        ps.setString(2, custAddress);
+        ps.setString(3, custPostCode);
+        ps.setString(4, custPhone);
+        ps.setInt(5, divisionID);
+        ps.setInt(6, custID);
+
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected;
+
+    }
+
+    public static int deleteCustomer(String custName) throws SQLException {
+
+        String sqlStmt = "DELETE FROM customers WHERE Customer_Name = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sqlStmt);
+
+        ps.setString(1, custName);
 
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;

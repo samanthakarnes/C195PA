@@ -1,6 +1,9 @@
 package Controller;
 
+import DAO.CountryDB;
 import DAO.CustomerDB;
+import DAO.DivisionDB;
+import Model.Country;
 import Model.Customer;
 import Model.Division;
 import javafx.event.ActionEvent;
@@ -17,8 +20,11 @@ import java.util.ResourceBundle;
 
 public class AddCustomerController {
 
-    public void initialize(){
-        divisionComboBox.getItems().addAll();
+    public void initialize() throws Exception {
+
+        countryComboBox.setItems(CountryDB.getAllCountries());
+        divisionComboBox.setItems(DivisionDB.getAllDivisions());
+
     }
 
     Stage stage;
@@ -40,7 +46,7 @@ public class AddCustomerController {
     private Button cancelButton;
 
     @FXML
-    private ComboBox<?> countryComboBox;
+    private ComboBox<Country> countryComboBox;
 
     @FXML
     private Label countryLabel;
@@ -70,6 +76,21 @@ public class AddCustomerController {
     private Button saveButton;
 
     @FXML
+    void onActionCountryComboAction(ActionEvent event) throws Exception {
+
+        while (countryComboBox.getValue().getCountryID() == 1){
+            divisionComboBox.setItems(DivisionDB.getDivisionsInCountry(1));
+        }
+        while (countryComboBox.getValue().getCountryID() == 2){
+            divisionComboBox.setItems(DivisionDB.getDivisionsInCountry(2));
+        }
+        while (countryComboBox.getValue().getCountryID() == 3){
+            divisionComboBox.setItems(DivisionDB.getDivisionsInCountry(3));
+        }
+
+    }
+
+    @FXML
     void onActionBackToCustView(ActionEvent event) throws IOException {
 
         //TODO add an "Are you sure?" prompt
@@ -91,17 +112,17 @@ public class AddCustomerController {
             String address = addressTextBox.getText();
             String postalCode = postTextBox.getText();
             String phoneNumber = phoneTextBox.getText();
-            int divisionID = divisionComboBox.getVisibleRowCount(); //maybe
+            int divisionID = divisionComboBox.getValue().getDivisionID();
 
             //verify information is valid?
 
-            //run a prepared statement thingy
+            //run a prepared statement
             int rowsAffected = CustomerDB.insertCustomer(name, address, postalCode, phoneNumber, divisionID);
 
             //TODO add a "Customer added!" notification
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
-            alert.setHeaderText("Adding " +rowsAffected + "customer to the database!");
+            alert.setHeaderText("Adding " +rowsAffected + " customer to the database!");
             alert.show();
 
 
