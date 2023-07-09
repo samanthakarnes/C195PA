@@ -78,15 +78,15 @@ public class AddCustomerController {
     @FXML
     void onActionCountryComboAction(ActionEvent event) throws Exception {
 
-        while (countryComboBox.getValue().getCountryID() == 1){
+        if (countryComboBox.getValue().getCountryID() == 1){
             divisionComboBox.setItems(DivisionDB.getDivisionsInCountry(1));
-        }
-        while (countryComboBox.getValue().getCountryID() == 2){
+        } else
+        if (countryComboBox.getValue().getCountryID() == 2){
             divisionComboBox.setItems(DivisionDB.getDivisionsInCountry(2));
-        }
-        while (countryComboBox.getValue().getCountryID() == 3){
+        } else
+        if (countryComboBox.getValue().getCountryID() == 3){
             divisionComboBox.setItems(DivisionDB.getDivisionsInCountry(3));
-        }
+        } else divisionComboBox.setItems(DivisionDB.getAllDivisions());
 
     }
 

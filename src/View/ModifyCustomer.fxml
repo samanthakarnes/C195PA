@@ -59,7 +59,7 @@
                         <TextField fx:id="addressTextBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="postTextBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField fx:id="phoneTextBox" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <ComboBox fx:id="countryComboBox" prefHeight="25.0" prefWidth="192.0" promptText="Select a country" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <ComboBox fx:id="countryComboBox" onAction="#onActionCountryCombo" prefHeight="25.0" prefWidth="192.0" promptText="Select a country" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <ComboBox fx:id="divisionComboBox" layoutX="318.0" layoutY="204.0" prefHeight="25.0" prefWidth="192.0" promptText="Select a State or Province" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                     </children>
                     <padding>

@@ -126,6 +126,31 @@ public class ModifyCustomerController implements Initializable {
     @FXML
     private Button saveButton;
 
+    /**Filters the division combobox to only show the divisions in the selected country
+     *
+     * @param event
+     * @throws Exception
+     */
+    @FXML
+    void onActionCountryComboAction(ActionEvent event) throws Exception {
+
+        if (countryComboBox.getValue().getCountryID() == 1){
+            divisionComboBox.setItems(DivisionDB.getDivisionsInCountry(1));
+        } else
+        if (countryComboBox.getValue().getCountryID() == 2){
+            divisionComboBox.setItems(DivisionDB.getDivisionsInCountry(2));
+        } else
+        if (countryComboBox.getValue().getCountryID() == 3){
+            divisionComboBox.setItems(DivisionDB.getDivisionsInCountry(3));
+        } else divisionComboBox.setItems(DivisionDB.getAllDivisions());
+
+    }
+
+    /** Sends user back to customer table view
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionBackToCustView(ActionEvent event) throws IOException {
 
@@ -136,6 +161,12 @@ public class ModifyCustomerController implements Initializable {
 
     }
 
+    /** This method will take information in modify customer screen and use it to update an existing customer
+     * Every text box except the customer ID is modifiable
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionSaveAddCustomer(ActionEvent event) throws IOException {
 
@@ -148,7 +179,6 @@ public class ModifyCustomerController implements Initializable {
             String phoneNumber = phoneTextBox.getText();
             int divisionID = divisionComboBox.getValue().getDivisionID();
 
-            //TODO Fix modifycustomer method
             //run a prepared statement
             int rowsAffected = CustomerDB.modifyCustomer(customerID, name, address, postalCode, phoneNumber, divisionID);
 
