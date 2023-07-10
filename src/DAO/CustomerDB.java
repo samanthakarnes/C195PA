@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class CustomerDB {
-    public boolean act;
 
     //uses search field to run a SQL select query
     public static Customer getCustomer(String customerName) throws SQLException, Exception {

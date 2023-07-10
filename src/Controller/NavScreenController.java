@@ -33,6 +33,9 @@ public class NavScreenController implements Initializable {
     @FXML
     private Button userButton;
 
+    @FXML
+    private Button appointmentButton;
+
     //goes back to login screen
     @FXML
     void onActionBackButton(ActionEvent event) throws IOException {
@@ -48,6 +51,15 @@ public class NavScreenController implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/View/CustomerTableView.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+
+    @FXML
+    void onActionAppointmentPress(ActionEvent event) throws IOException {
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/View/AppointmentTableView.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+
     }
 
     @FXML

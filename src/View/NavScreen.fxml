@@ -4,13 +4,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NavScreenController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10.0">
          <children>
             <Button fx:id="customersButton" alignment="CENTER" mnemonicParsing="false" onAction="#onActionCustButton" text="Customers" textAlignment="CENTER" />
             <Button fx:id="userButton" mnemonicParsing="false" onAction="#onActionUserButton" text="Users" />
+            <Button fx:id="appointmentButton" mnemonicParsing="false" onAction="#onActionAppointmentPress" text="Appointments" />
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#onActionBackButton" text="Back" />
          </children>
       </VBox>

@@ -1,8 +1,8 @@
 package Model;
 
-import Helper.DateAndTimeProcessing;
 
-public class Customer extends DateAndTimeProcessing {
+
+public class Customer {
     private int customerID; //private key in DB
     String customerName;
     String address;
