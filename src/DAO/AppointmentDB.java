@@ -27,8 +27,8 @@ public class AppointmentDB {
             String desc = result.getString("Description");
             String location = result.getString("Location");
             String type = result.getString("Type");
-            LocalDateTime start = result.getDate("Start");
-            LocalDateTime end = result.getObject("End", Appointment<LocalDateTime>);
+            LocalDateTime start = result.getTimestamp("Start").toLocalDateTime();
+            LocalDateTime end = result.getTimestamp("End").toLocalDateTime();
             int custID = result.getInt("Customer_ID");
             int userID = result.getInt("User_ID");
             int contactID = result.getInt("Contact_ID");

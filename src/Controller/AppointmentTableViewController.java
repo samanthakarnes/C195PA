@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.AppointmentDB;
 import DAO.CustomerDB;
 import Model.Appointment;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +32,7 @@ public class AppointmentTableViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
-            //customerTableView.setItems(//TODO write the getAllAppointments);
+            appointmentTableView.setItems(AppointmentDB.getAllAppointments());
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
@@ -92,7 +93,7 @@ public class AppointmentTableViewController implements Initializable {
     private TextField customerSearch;
 
     @FXML
-    private TableView<?> customerTableView;
+    private TableView<Appointment> appointmentTableView;
 
     @FXML
     private Button deleteApptButton;

@@ -74,7 +74,7 @@
                                     <Insets bottom="5.0" />
                                  </padding>
                                         </HBox>
-                                        <TableView fx:id="customerTableView" prefHeight="372.0" prefWidth="976.0">
+                                        <TableView fx:id="appointmentTableView" prefHeight="372.0" prefWidth="976.0">
                                             <columns>
                                                 <TableColumn fx:id="apptIDCol" prefWidth="40.0" resizable="false" text="ID" />
                                                 <TableColumn fx:id="apptTitleCol" prefWidth="98.0" text="Title" />
